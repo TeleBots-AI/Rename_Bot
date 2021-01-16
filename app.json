@@ -1,5 +1,5 @@
 {
-  "name": "TG Rename Bot",
+  "name": "Tele Rename Bot",
   "description": "Telegram's best Open Source Rename Bot. Create your Fork now.",
   "keywords": [
     "telegram",
@@ -8,9 +8,10 @@
     "source",
     "Rename"
   ],
-  "success_url": "https://github.com/spechide/AnyDLbot",
-  "website": "https://githib.com/TeleBots-AI",
-  "repository": "https://github.com/TeleBots-AI/Rename_bot",
+  "success_url": "https://telegram.dog/AnyDLBot",
+  "website": "https://github.com/SpEcHiDe/AnyDLBot",
+  "repository": "https://github.com/erichdanikeninfo/TG-Rename-Bot",
+  "logo": "https://telegra.ph/file/681227bece69de877e442.jpg",
   "env": {
     "WEBHOOK": {
       "description": "Setting this to ANYTHING will enable webhooks when in env mode",
@@ -18,15 +19,23 @@
     },
     "TG_BOT_TOKEN": {
       "description": "Your bot token, as a string.",
-      "value": "1501851789:AAE1XOswlc6cGTsTjQiUxRjMDQGmppjaXQY"
+      "value": ""
+    },
+    "USER_NAME": {
+      "description": "Your user name like @MysteryxD",
+      "value": "@TeleBotsDev"
+    },
+    "CHAT_BASE_TOKEN": {
+      "description": "Your chat base token, as a string.",
+      "value": ""
     },
     "APP_ID": {
       "description": "Get this value from https://my.telegram.org",
-      "value": "2010298"
+      "value": ""
     },
     "API_HASH": {
       "description": "Get this value from https://my.telegram.org",
-      "value": "43595bbdc8de3bbafa5913ce573f7dcb"
+      "value": ""
     },
     "AUTH_USERS": {
       "description": "allow only pre-defined users to use this bot",
@@ -35,6 +44,11 @@
     "BANNED_USERS": {
       "description": "Banned Unwanted members..",
       "value": "",
+      "required": false
+    },
+    "CHUNK_SIZE": {
+      "description": "chunk size that should be used with requests",
+      "value": "128",
       "required": false
     }
   },
@@ -47,6 +61,8 @@
     }
   ],
   "buildpacks": [{
+    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+  }, {
     "url": "heroku/python"
   }],
   "formation": {
