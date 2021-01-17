@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 import os
 import time
-import random
+
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
     from sample_config import Config
@@ -22,8 +22,7 @@ from translation import Translation
 
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
-from pyrogram import Client, Filters
-from helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
+
 from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
 
@@ -31,7 +30,6 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
 from PIL import Image
-
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["rename_video"]))
 async def rename_doc(bot, update):
