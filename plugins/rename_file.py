@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Ns_AnoNymouS 
+# (c) Shrimadhav U K
 
 # the logging things
 import logging
@@ -22,7 +22,6 @@ from translation import Translation
 
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
-from pyrogram import Client, Filters
 
 from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
@@ -43,17 +42,8 @@ async def rename_doc(bot, update):
             reply_to_message_id=update.message_id
         )
         return
-    TRChatBase(update.from_user.id, update.text, "rename")
     if (" " in update.text) and (update.reply_to_message is not None):
         cmd, file_name = update.text.split(" ", 1)
-        if len(file_name) > 64:
-            await update.reply_text(
-                Translation.IFLONG_FILE_NAME.format(
-                    alimit="64",
-                    num=len(file_name)
-                )
-            )
-            return
         description = Translation.CUSTOM_CAPTION_UL_FILE
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
@@ -67,27 +57,29 @@ async def rename_doc(bot, update):
             file_name=download_location,
             progress=progress_for_pyrogram,
             progress_args=(
-                Translation.DOWNLOAD_START,
-                a,
-                c_time
+                Translation.DOWNLOAD_START, a.message_id, update.chat.id, c_time
             )
         )
         if the_real_download_location is not None:
-            try:
+            await bot.edit_message_text(
+                text=Translation.SAVED_RECVD_DOC_FILE,
+                chat_id=update.chat.id,
+                message_id=a.message_id
+            )
+            if "IndianMovie" in the_real_download_location:
                 await bot.edit_message_text(
-                    text=Translation.SAVED_RECVD_DOC_FILE,
+                    text=Translation.RENAME_403_ERR,
                     chat_id=update.chat.id,
                     message_id=a.message_id
                 )
-            except:
-                pass
+                return
             new_file_name = download_location + file_name
             os.rename(the_real_download_location, new_file_name)
             await bot.edit_message_text(
                 text=Translation.UPLOAD_START,
                 chat_id=update.chat.id,
                 message_id=a.message_id
-                )
+            )
             logger.info(the_real_download_location)
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
             if not os.path.exists(thumb_image_path):
@@ -120,14 +112,12 @@ async def rename_doc(bot, update):
                 reply_to_message_id=update.reply_to_message.message_id,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    Translation.UPLOAD_START,
-                    a, 
-                    c_time
+                    Translation.UPLOAD_START, a.message_id, update.chat.id, c_time
                 )
             )
             try:
                 os.remove(new_file_name)
-                #os.remove(thumb_image_path)
+                os.remove(thumb_image_path)
             except:
                 pass
             await bot.edit_message_text(
