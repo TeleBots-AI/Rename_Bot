@@ -56,14 +56,14 @@ ABUSIVE_USERS = "You are not allowed to use this bot. If you think this is a mis
 FREE_USER_LIMIT_Q_SZE = """Cannot Process.
 Free users only 1 request per 30 minutes.
 /upgrade or Try 1800 seconds later."""
-    IFLONG_FILE_NAME = """File Name limit allowed by Telegram is {alimit} characters.
+IFLONG_FILE_NAME = """File Name limit allowed by Telegram is {alimit} characters.
 The given file name has {num} characters.
 
 <b>Essays Not allowed in Telegram file name!</b>
 ©️ <code>@TeleRenames_Bot</code>
 Please short your file name and try again!"""
 
-    About = """Hi __{}__,
+About = """Hi __{}__,
 
 **📝 Language:** Python 3
 
