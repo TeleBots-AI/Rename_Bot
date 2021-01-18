@@ -33,7 +33,7 @@ Telegram ID: <code>{}</code>
 Plan name: <a href='https://t.me/TeleBotInC/426'>{}</a>
 Expires on: {}"""
 USER_ADDED_TO_DB = "User <a href='tg://user?id={}'>{}</a> added to {} till {}."
-    HELP_USER = """Hai <b><i>{}</i></b>, 
+HELP_USER = """Hai <b><i>{}</i></b>, 
 I am Renamer bot ✍ by <a href='https://t.me/{}'>My Father 👨‍🏫</a>
     
 1. Send Me A Thumbnail.
