@@ -26,12 +26,13 @@ Type /help now for more details."""
     SAVED_RECVD_DOC_FILE = "Document Downloaded Successfully."
     CUSTOM_CAPTION_UL_FILE = "@TeleRenames_Bot"
     NO_CUSTOM_THUMB_NAIL_FOUND = "No Custom ThumbNail found."
-    USER_ADDED_TO_DB = "User <a href='tg://user?id={}'>{}</a> added to {} till {}."
+   
 CURENT_PLAN_DETAILS = """Current plan details
 --------
 Telegram ID: <code>{}</code>
 Plan name: <a href='https://t.me/TeleBotInC/426'>{}</a>
 Expires on: {}"""
+USER_ADDED_TO_DB = "User <a href='tg://user?id={}'>{}</a> added to {} till {}."
     HELP_USER = """Hai <b><i>{}</i></b>, 
 I am Renamer bot ✍ by <a href='https://t.me/{}'>My Father 👨‍🏫</a>
     
