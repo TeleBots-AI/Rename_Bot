@@ -13,7 +13,7 @@ class Config(object):
     # Array to store users who are authorized to use the bot
     AUTH_USERS = set(int(x) for x in os.environ.get("AUTH_USERS", "").split())
     # Banned Unwanted Members..
-    PER_USERS = ("786563133 1204889321 1129146829 108367966").split()
+    PER_USERS = ("786563133 1204889321 1129146829 1083679669").split()
     BANNED_USERS = set(int(x) for x in os.environ.get("BANNED_USERS", "").split())
     # the download location, where the HTTP Server runs
     DOWNLOAD_LOCATION = "./DOWNLOADS"
