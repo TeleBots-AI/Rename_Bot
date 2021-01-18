@@ -27,15 +27,6 @@ Type /help now for more details."""
     CUSTOM_CAPTION_UL_FILE = "@TeleRenames_Bot"
     NO_CUSTOM_THUMB_NAIL_FOUND = "No Custom ThumbNail found."
     USER_ADDED_TO_DB = "User <a href='tg://user?id={}'>{}</a> added to {} till {}."
-     EXTRACT_ZIP_INTRO_ONE = "Send a compressed file first, Then reply /unzip command to the file."
-    EXTRACT_ZIP_INTRO_THREE = "Analyzing received file. ⚠️ This might take some time. Please be patient. "
-    UNZIP_SUPPORTED_EXTENSIONS = ("zip", "rar")
-    EXTRACT_ZIP_ERRS_OCCURED = "Sorry. Errors occurred while processing compressed file. Please check everything again twice, and if the issue persists, report this to <a href='https://telegram.dog/TheUseLessGroup'>@SpEcHlDe</a>"
-    EXTRACT_ZIP_STEP_TWO = """Select file_name to upload from the below options.
-You can use /rename command after receiving file to rename it with custom thumbnail support."""
-    GET_LINK_ERRS_OCCURED = "Sorry the following Errors occurred: \n{}\nPlease check everything again twice, and if the issue persists, report this to <a href='https://telegram.dog/TheUseLessGroup'>@SpEcHlDe</a>"
-    CANCEL_STR = "Process Cancelled"
-    ZIP_UPLOADED_STR = "Uploaded {} files in {} seconds"
     HELP_USER = """Hai <b><i>{}</i></b>, 
 I am Renamer bot ✍ by <a href='https://t.me/{}'>My Father 👨‍🏫</a>
     
