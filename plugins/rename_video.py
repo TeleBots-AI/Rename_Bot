@@ -34,6 +34,7 @@ from PIL import Image
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["rename_video"]))
 async def rename_doc(bot, update):
+      TRChatBase(update.from_user.id, update.text, "rename")
     if str(update.from_user.id) not in Config.PER_USERS:
         await bot.send_message(
             chat_id=update.chat.id,
@@ -41,7 +42,6 @@ async def rename_doc(bot, update):
             reply_to_message_id=update.message_id
         )
         return
-    TRChatBase(update.from_user.id, update.text, "rename")
     if (" " in update.text) and (update.reply_to_message is not None):
         cmd, file_name = update.text.split(" ", 1)
         if len(file_name) > 64:
