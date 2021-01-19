@@ -58,8 +58,8 @@ async def help_user(bot, update):
 async def get_me_info(bot, update):
     # logger.info(update)
     TRChatBase(update.from_user.id, update.text, "/me")
+      chat_id = str(update.from_user.id)
 if str(update.from_user.id) not in Config.PER_USERS:
-    chat_id = str(update.from_user.id)
     chat_id, plan_type, expires_at = GetExpiryDateN(chat_id)
     await bot.send_message(
         chat_id=update.chat.id,
@@ -69,7 +69,6 @@ if str(update.from_user.id) not in Config.PER_USERS:
         reply_to_message_id=update.message_id
     )
 else:
-chat_id = str(update.from_user.id)
     chat_id, plan_type, expires_at = GetExpiryDate(chat_id)
     await bot.send_message(
         chat_id=update.chat.id,
