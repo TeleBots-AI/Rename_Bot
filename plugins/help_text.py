@@ -32,14 +32,14 @@ myfather = 'https://t.me/{}'.format(Config.USER_NAME[1:])
 from helper_funcs.chat_base import TRChatBase
 
 def GetExpiryDate(chat_id):
-if str(update.from_user.id) in Config.PER_USERS:
     expires_at = (str(chat_id), "Unlimited User", "2022.01.01.12.00.00")
-    Config.AUTH_USERS.add(786563133)
-else:
-expires_at = (str(chat_id), "Free User", "2020.01.01.12.00.00")
     Config.AUTH_USERS.add(786563133)
     return expires_at
 
+def GetExpiryDateN(chat_id):
+    expires_at = (str(chat_id), "Free User", "2022.01.01.12.00.00")
+    Config.AUTH_USERS.add(786563133)
+    return expires_at
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["help"]))
 async def help_user(bot, update):
@@ -58,8 +58,9 @@ async def help_user(bot, update):
 async def get_me_info(bot, update):
     # logger.info(update)
     TRChatBase(update.from_user.id, update.text, "/me")
+if str(update.from_user.id) not in Config.PER_USERS:
     chat_id = str(update.from_user.id)
-    chat_id, plan_type, expires_at = GetExpiryDate(chat_id)
+    chat_id, plan_type, expires_at = GetExpiryDateN(chat_id)
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.CURENT_PLAN_DETAILS.format(chat_id, plan_type, expires_at),
@@ -67,6 +68,15 @@ async def get_me_info(bot, update):
         disable_web_page_preview=True,
         reply_to_message_id=update.message_id
     )
+else:
+chat_id = str(update.from_user.id)
+    chat_id, plan_type, expires_at = GetExpiryDate(chat_id)
+    await bot.send_message(
+        chat_id=update.chat.id,
+        text=Translation.CURENT_PLAN_DETAILS.format(chat_id, plan_type, expires_at),
+        parse_mode="html",
+        disable_web_page_preview=True,
+        reply_to_message_id=update.message_id
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["start"]))
 async def start(bot, update):
