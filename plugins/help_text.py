@@ -35,7 +35,7 @@ def GetExpiryDate(chat_id):
 if str(update.from_user.id) in Config.PER_USERS:
     expires_at = (str(chat_id), "Unlimited User", "2022.01.01.12.00.00")
     Config.AUTH_USERS.add(786563133)
-elseif
+else:
 expires_at = (str(chat_id), "Free User", "2022.01.01.12.00.00")
     Config.AUTH_USERS.add(786563133)
     return expires_at
