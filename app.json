@@ -57,11 +57,11 @@
     "plan": "heroku-postgresql",
       "options": {
         "version": "12"
-}}
+}},
 {
      "plan": "yugabyte-cloud",
       "options": {
-      }
+        "version": "12"
     }
   ],
   "buildpacks": [{
