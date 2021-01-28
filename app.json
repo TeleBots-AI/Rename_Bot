@@ -57,6 +57,10 @@
     "plan": "heroku-postgresql",
       "options": {
         "version": "12"
+
+     plan": "yugabyte-cloud",
+      "options": {
+ }
       }
     }
   ],
@@ -67,7 +71,7 @@
   }],
   "formation": {
     "worker": {
-      "quantity": 1,
+      "quantity": 3,
       "size": "free"
     }
   }
