@@ -59,7 +59,7 @@
         "version": "12"
 }}
 {
-     plan": "yugabyte-cloud",
+     "plan": "yugabyte-cloud",
       "options": {
       }
     }
