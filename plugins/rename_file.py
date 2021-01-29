@@ -35,7 +35,7 @@ from PIL import Image
 @pyrogram.Client.on_message(pyrogram.Filters.command(["rename"]))
 async def rename_doc(bot, update):
     TRChatBase(update.from_user.id, update.text, "rename")
-    if str(update.from_user.id) not in Config.AUTH_USERS:
+    if str(update.from_user.id) in Config.AUTH_USERS:
         await bot.send_message(
             chat_id=update.chat.id,
             text=Translation.NOT_AUTH_USER_TEXT,
