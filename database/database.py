@@ -10,7 +10,10 @@ import asyncio
 from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, UniqueConstraint, func
 
 
-from sample_config import Config
+if bool(os.environ.get("WEBHOOK", False)):
+    from sample_config import Config
+else:
+    from config import Config
 
 
 def start() -> scoped_session:
@@ -55,7 +58,7 @@ async def del_thumb(id):
         SESSION.delete(msg)
         SESSION.commit()
 
-async def get_thumb(id):
+async def thumb(id):
     try:
         t = SESSION.query(Thumbnail).get(id)
         return t
