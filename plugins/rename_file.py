@@ -22,7 +22,7 @@ from translation import Translation
 
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
-from pyrogram import Client, Filters
+from pyrogram import Client, filters
 
 from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
@@ -31,16 +31,17 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
 from PIL import Image
+from database.database import *
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["rename"]))
+@pyrogram.Client.on_message(pyrogram.filters.command(["rename"]))
 async def rename_doc(bot, update):
-    if update.from_user.id in Config.BANNED_USERS:
-        await bot.delete_messages(
+    TRChatBase(update.from_user.id, update.text, "rename")
+    if str(update.from_user.id) not in Config.PER_USERS:
+        await bot.send_message(
             chat_id=update.chat.id,
-            message_ids=update.message_id,
-            revoke=True
-        )
+            text=Translation.NOT_AUTH_USER_TEXT,
+            reply_to_message_id=update.message_id
         return
     TRChatBase(update.from_user.id, update.text, "rename")
     if (" " in update.text) and (update.reply_to_message is not None):
@@ -80,13 +81,6 @@ async def rename_doc(bot, update):
                 )
             except:
                 pass
-            if "IndianMovie" in the_real_download_location:
-                await bot.edit_message_text(
-                    text=Translation.RENAME_403_ERR,
-                    chat_id=update.chat.id,
-                    message_id=a.message_id
-                )
-                return
             new_file_name = download_location + file_name
             os.rename(the_real_download_location, new_file_name)
             await bot.edit_message_text(
@@ -97,7 +91,13 @@ async def rename_doc(bot, update):
             logger.info(the_real_download_location)
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
             if not os.path.exists(thumb_image_path):
-                thumb_image_path = None
+                mes = await get_thumb(update.from_user.id)
+                if mes != None:
+                    m = await bot.get_messages(update.chat.id, mes.msg_id)
+                    await m.download(file_name=thumb_image_path)
+                    thumb_image_path = thumb_image_path
+                else:
+                    thumb_image_path = None
             else:
                 width = 0
                 height = 0
