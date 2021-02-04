@@ -42,6 +42,7 @@ async def rename_doc(bot, update):
             chat_id=update.chat.id,
             text=Translation.NOT_AUTH_USER_TEXT,
             reply_to_message_id=update.message_id
+        )
         return
     TRChatBase(update.from_user.id, update.text, "rename")
     if (" " in update.text) and (update.reply_to_message is not None):
