@@ -72,9 +72,6 @@ async def start(bot, update):
                 [
                     InlineKeyboardButton('Support Channel', url='https://t.me/TeleBotinc'),
                     InlineKeyboardButton('Feedback', url='https://t.me/TelebotsDev')
-                ],
-                [
-                    InlineKeyboardButton('Admin Channel, url='https://t.me/smtchat_bot')
                 ]
             ]
         ),
