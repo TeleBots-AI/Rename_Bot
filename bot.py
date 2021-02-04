@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) ns_anonymous (Not us) 
+# (c) Shrimadhav U K
 
 # the logging things
 import logging
@@ -28,7 +28,7 @@ if __name__ == "__main__" :
         root="plugins"
     )
     app = pyrogram.Client(
-        "Renamer",
+        "AnyDLBot",
         bot_token=Config.TG_BOT_TOKEN,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
