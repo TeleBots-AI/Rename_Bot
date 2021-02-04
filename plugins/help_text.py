@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Ns_AnoNymouS 
+# (c) Shrimadhav U K
 
 # the logging things
 import logging
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
+import pyrogram
 import os
 import sqlite3
+from pyrogram import filters
+from pyrogram import Client
+from pyrogram.types import InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup
 
-from pyrogram import InlineKeyboardMarkup, InlineKeyboardButton
 
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
@@ -22,55 +27,61 @@ else:
 # the Strings used for this "thing"
 from translation import Translation
 
-import pyrogram
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-
-myfather = 'https://t.me/{}'.format(Config.USER_NAME[1:])
 
 
 
 from helper_funcs.chat_base import TRChatBase
 
 def GetExpiryDate(chat_id):
-    expires_at = (str(chat_id), "Unlimited User", "2022.01.01.12.00.00")
-    Config.AUTH_USERS.add(786563133)
+    expires_at = (str(chat_id), "Source Cloned User", "1970.01.01.12.00.00")
+    Config.AUTH_USERS.add(861055237)
     return expires_at
 
-def GetExpiryDateN(chat_id):
-    expires_at = (str(chat_id), "Free User", "2022.01.01.12.00.00")
-    Config.AUTH_USERS.add(786563133)
-    return expires_at
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["help"]))
+@pyrogram.Client.on_message(pyrogram.filters.command(["help"]))
 async def help_user(bot, update):
     # logger.info(update)
     TRChatBase(update.from_user.id, update.text, "/help")
     await bot.send_message(
         chat_id=update.chat.id,
-        text=Translation.HELP_USER.format(update.from_user.first_name, Config.USER_NAME[1:]),
+        text=Translation.HELP_USER,
+        reply_to_message_id=update.message_id
+    )
+
+@pyrogram.Client.on_message(pyrogram.filters.command(["about"]))
+async def about_meh(bot, update):
+    # logger.info(update)
+    TRChatBase(update.from_user.id, update.text, "/about")
+    await bot.send_message(
+        chat_id=update.chat.id,
+        text=Translation.ABOUT_ME,
         parse_mode="html",
         disable_web_page_preview=True,
         reply_to_message_id=update.message_id
     )
-
-@pyrogram.Client.on_message(pyrogram.Filters.command(["start"]))
+@pyrogram.Client.on_message(pyrogram.filters.command(["start"]))
 async def start(bot, update):
     # logger.info(update)
     TRChatBase(update.from_user.id, update.text, "/start")
+
     await bot.send_message(
         chat_id=update.chat.id,
-        text=Translation.START_TEXT.format(update.from_user.first_name, Config.USER_NAME), 
-        parse_mode="html",
-        #reply_to_message_id=update.message_id
+        text=Translation.START_TEXT.format(update.from_user.first_name),
         reply_markup=InlineKeyboardMarkup(
-        [
-          [
-          InlineKeyboardButton('My Devloper 👨‍💻', url=myfather)
-          ]
-        ]
-       )
-     )
-@pyrogram.Client.on_message(pyrogram.Filters.command(["upgrade"]))
+            [
+                [
+                    InlineKeyboardButton('Support Channel', url='https://t.me/TeleBotinc'),
+                    InlineKeyboardButton('Feedback', url='https://t.me/TelebotsDev')
+                ],
+                [
+                    InlineKeyboardButton('Admin Channel, url='https://t.me/')
+                ]
+            ]
+        ),
+        reply_to_message_id=update.message_id
+    )
+
+@pyrogram.Client.on_message(pyrogram.filters.command(["upgrade"]))
 async def upgrade(bot, update):
     # logger.info(update)
     TRChatBase(update.from_user.id, update.text, "/upgrade")
@@ -80,27 +91,4 @@ async def upgrade(bot, update):
         parse_mode="html",
         reply_to_message_id=update.message_id,
         disable_web_page_preview=True
-    )
-
-@pyrogram.Client.on_message(pyrogram.Filters.command(["donate"]))
-async def donate(bot, update):
-       await bot.send_message(
-             chat_id=update.chat.id,
-             text="I am very happy to listen you this word, making of this bot take lot of work and time so please donate by pressing this button present below",
-             reply_markup=InlineKeyboardMarkup(
-             [
-               [
-                 InlineKeyboardButton('Donate 💰', url='https://t.me/telebotsdev')
-               ]
-             ]
-           )
-          )
-
-@pyrogram.Client.on_message(pyrogram.Filters.command(["about"]))
-async def about(bot, update):
-    await bot.send_message(
-        chat_id=update.chat.id,
-        text=Translation.About.format(update.from_user.first_name),
-        parse_mode="markdown",
-        reply_to_message_id=update.message_id
     )
