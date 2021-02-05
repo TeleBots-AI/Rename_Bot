@@ -46,7 +46,7 @@ async def rename_doc(bot, update):
         except ApiTelegramException as e:
             if e.result_json['description'] == 'Bad Request: user not found':
                 return False
-        if str(update.from_user.id) if not is_subscribed(CHAT_ID, USER_ID)
+        if not is_subscribed(CHAT_ID, USER_ID):
             await bot.send_message(
             chat_id=update.chat.id,
             text=Translation.NOT_AUTH_USER_TEXT,
