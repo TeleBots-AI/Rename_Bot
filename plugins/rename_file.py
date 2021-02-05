@@ -47,7 +47,7 @@ async def rename_doc(bot, update):
             if e.result_json['description'] == 'Bad Request: user not found':
                 return False
         if not is_subscribed(CHAT_ID, USER_ID):
-            await bot.send_message(
+await bot.send_message(
             chat_id=update.chat.id,
             text=Translation.NOT_AUTH_USER_TEXT,
             reply_to_message_id=update.message_id
