@@ -40,7 +40,7 @@ async def rename_doc(bot, update):
     CHAT_ID = -1001494231232
     USER_ID = chat.id
     def is_subscribed(chat_id, user_id):
-    try:
+        try:
         bot.get_chat_member(chat_id, user_id)
         return True
     except ApiTelegramException as e:
