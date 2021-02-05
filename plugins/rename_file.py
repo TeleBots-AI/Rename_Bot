@@ -46,7 +46,7 @@ async def rename_doc(bot, update):
         return
     TRChatBase(update.from_user.id, update.text, "rename")
     if (" " in update.text) and (update.reply_to_message is not None):
-        cmd, file_name = update.text.split(" ", 1)
+        cmd, file_name, dis = update.text.split(" ", 1, 2)
         if len(file_name) > 64:
             await update.reply_text(
                 Translation.IFLONG_FILE_NAME.format(
@@ -55,7 +55,7 @@ async def rename_doc(bot, update):
                 )
             )
             return
-        description = Translation.CUSTOM_CAPTION_UL_FILE
+        description = download_location + dis
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
             chat_id=update.chat.id,
