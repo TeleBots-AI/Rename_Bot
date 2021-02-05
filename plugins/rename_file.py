@@ -33,7 +33,7 @@ from hachoir.parser import createParser
 from PIL import Image
 from database.database import *
 
-  def CHAT_ID = -1001494231232
+    def CHAT_ID = -1001494231232
     def USER_ID = chat.id
     def is_subscribed(chat_id, user_id):
         try:
